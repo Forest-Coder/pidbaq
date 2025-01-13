@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import tailwindStyles from "../index.css?inline";
-import supabase from "../supabaseClient";
+import { addFeedback } from "@/lib/utils";
 
 export const Widget = ({ projectId }) => {
   const [rating, setRating] = useState(3);
@@ -26,9 +26,13 @@ export const Widget = ({ projectId }) => {
       p_message: form.feedback.value,
       p_rating: rating,
     };
-    const { data: returnedData, error } = await supabase.rpc("add_feedback", data);
+  
+  
+    const request = await addFeedback(data)
+    //TODO Error handling for this one.
+    // const { data: returnedData, error }
+
     setSubmitted(true);
-    console.log(returnedData);
   };
 
   return (
@@ -148,10 +152,10 @@ function MessageCircleIcon(props) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="lucide lucide-message-circle"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="lucide lucide-message-circle"
     >
       <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
     </svg>
