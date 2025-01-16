@@ -3,28 +3,33 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
+import { SVGProps, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import tailwindStyles from "../index.css?inline";
+import { JSX } from "react/jsx-runtime";
 import { addFeedback } from "@/lib/utils";
+import { Feedback } from "@/types/feedback";
 
-export const Widget = ({ projectId }) => {
-  const [rating, setRating] = useState(3);
+
+const DEFAULT_RATING = 3;
+
+export const Widget = ({ projectId }: any) => {
+  const [rating, setRating] = useState(DEFAULT_RATING);
   const [submitted, setSubmitted] = useState(false);
 
-  const onSelectStar = (index) => {
+  const onSelectStar = (index: number) => {
     setRating(index + 1);
   };
 
-  const submit = async (e) => {
+  const submit = async (e: { preventDefault: () => void; target: any; }) => {
     e.preventDefault();
     const form = e.target;
-    const data = {
-      p_project_id: projectId,
-      p_user_name: form.name.value,
-      p_user_email: form.email.value,
-      p_message: form.feedback.value,
-      p_rating: rating,
+    const data: Feedback = {
+      projectId: projectId,
+      userName: form.name.value,
+      userEmail: form.email.value,
+      message: form.feedback.value,
+      rating: rating,
     };
   
   
@@ -123,7 +128,7 @@ export const Widget = ({ projectId }) => {
   );
 };
 
-function StarIcon(props) {
+function StarIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -142,7 +147,7 @@ function StarIcon(props) {
   );
 }
 
-function MessageCircleIcon(props) {
+function MessageCircleIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
