@@ -3,10 +3,9 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Separator } from "@/components/ui/separator";
-import { SVGProps, useState } from "react";
+import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import tailwindStyles from "../index.css?inline";
-import { JSX } from "react/jsx-runtime";
 import { addFeedback } from "@/lib/utils";
 import { Feedback } from "@/types/feedback";
 import { Flame, MessageSquareText } from "lucide-react";
@@ -129,25 +128,3 @@ export const Widget = ({ projectId }: any) => {
     </>
   );
 };
-
-
-
-function MessageCircleIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="lucide lucide-message-circle"
-    >
-      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-    </svg>
-  );
-}
