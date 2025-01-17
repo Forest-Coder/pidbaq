@@ -9,6 +9,7 @@ import tailwindStyles from "../index.css?inline";
 import { JSX } from "react/jsx-runtime";
 import { addFeedback } from "@/lib/utils";
 import { Feedback } from "@/types/feedback";
+import { Flame, MessageSquareText } from "lucide-react";
 
 
 const DEFAULT_RATING = 3;
@@ -17,7 +18,7 @@ export const Widget = ({ projectId }: any) => {
   const [rating, setRating] = useState(DEFAULT_RATING);
   const [submitted, setSubmitted] = useState(false);
 
-  const onSelectStar = (index: number) => {
+  const onSelectRate = (index: number) => {
     setRating(index + 1);
   };
 
@@ -31,7 +32,7 @@ export const Widget = ({ projectId }: any) => {
       message: form.feedback.value,
       rating: rating,
     };
-  
+
     //@ts-ignore
     const request = await addFeedback(data)
     //TODO Error handling for this one.
@@ -48,7 +49,7 @@ export const Widget = ({ projectId }: any) => {
         <Popover>
           <PopoverTrigger asChild>
             <Button className="rounded-full shadow-lg hover:scale-105">
-              <MessageCircleIcon className="mr-2 h-5 w-5" />
+              <MessageSquareText />
               Feedback
             </Button>
           </PopoverTrigger>
@@ -97,12 +98,11 @@ export const Widget = ({ projectId }: any) => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       {[...Array(5)].map((_, index) => (
-                        <StarIcon
+                        <Flame
                           key={index}
-                          className={`h-5 w-5 cursor-pointer ${
-                            rating > index ? "fill-primary" : "fill-muted stroke-muted-foreground"
-                          }`}
-                          onClick={() => onSelectStar(index)}
+                          className={` cursor-pointer ${rating > index ? "fill-primary" : "fill-muted stroke-muted-foreground"
+                            }`}
+                          onClick={() => onSelectRate(index)}
                         />
                       ))}
                     </div>
@@ -111,17 +111,18 @@ export const Widget = ({ projectId }: any) => {
                 </form>
               </div>
             )}
-            <Separator className="my-4" />
-            <div className="text-gray-600">
-              Powered by{" "}
+            <Separator className="my-2" />
+            <span className="text-gray-600 flex flex-row">
+              Powered by&nbsp;
               <a
-                href="https://nexx-saas.vercel.app/"
+                href={import.meta.env.VITE_FEEDBACK_SAAS_URL || "https://www.google.com"}
                 target="_blank"
-                className="text-indigo-600 hover:underline"
+                className="text-blue-500 hover:underline"
               >
-                Nexx ⚡️
+                <span className="flex">PIDBAQ <Flame /></span>
+
               </a>
-            </div>
+            </span>
           </PopoverContent>
         </Popover>
       </div>
@@ -129,24 +130,7 @@ export const Widget = ({ projectId }: any) => {
   );
 };
 
-function StarIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  );
-}
+
 
 function MessageCircleIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
