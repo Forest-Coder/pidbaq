@@ -17,7 +17,5 @@ export async function addFeedback(feedback: Feedback){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(feedback)
-  }).catch(err => {
-    console.error(err)
   })
 }

@@ -1,5 +1,6 @@
 // import { hydrateRoot } from "react-dom/client";
 // import { Widget } from "./components/Widget";
+//@ts-ignore
 import WidgetWebComponent from "./web-component";
 
 customElements.define("pid-baq", WidgetWebComponent);
