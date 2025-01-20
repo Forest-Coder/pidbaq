@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "npx http-server ./test --cors -p 3333",
+    "serve:widget": "npx http-server ./dist --cors -p 3334"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.1",
