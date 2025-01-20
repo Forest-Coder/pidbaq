@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <Widget projectId="526819da-b63d-4a16-9900-4d2809c00e86" />
+      <Widget projectId="f24a0147-d20f-4f93-8dcf-bf62db2c12be" />
     </>
   )
 }
