@@ -32,13 +32,13 @@ export const Widget = ({ projectId }: any) => {
       rating: rating,
     };
 
-    //@ts-ignore
+    
     const request = await addFeedback(data)
     //TODO Error handling for this one.
     // const { data: returnedData, error }
 
     setSubmitted(true);
-    // console.log(request)
+    console.log(request)
   };
 
   return (
