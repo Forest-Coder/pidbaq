@@ -6,14 +6,20 @@ import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import tailwindStyles from "../index.css?inline";
-import { addFeedback } from "@/lib/utils";
+// import { addFeedback } from "@/lib/utils";
 import { Feedback } from "@/types/feedback";
 import { Flame, MailIcon } from "lucide-react";
 
 
 const DEFAULT_RATING = 3;
 
-export const Widget = ({ projectId }: any) => {
+interface FormData {
+  name: HTMLInputElement;
+  email: HTMLInputElement;
+  feedback: HTMLTextAreaElement;
+}
+
+export const Widget = ({ projectId }: {projectId: string}) => {
   const [rating, setRating] = useState(DEFAULT_RATING);
   const [submitted, setSubmitted] = useState(false);
 
@@ -22,24 +28,29 @@ export const Widget = ({ projectId }: any) => {
     setRating(index + 1);
   };
 
-  const submit = async (e: { preventDefault: () => void; target: any; }) => {
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target;
+    const form = e.currentTarget;
+    const formData: FormData = {
+      name: form.elements.namedItem('name') as HTMLInputElement,
+      email: form.elements.namedItem('email') as HTMLInputElement,
+      feedback: form.elements.namedItem('feedback') as HTMLTextAreaElement,
+    };
     const data: Feedback = {
       projectId: projectId,
-      userName: form.name.value,
-      userEmail: form.email.value,
-      message: form.feedback.value,
+      userName: formData.name.value,
+      userEmail: formData.email.value,
+      message: formData.feedback.value,
       rating: rating,
     };
 
-
-    const response = await addFeedback(data)
+    console.log(data)
+    // const response = await addFeedback(data)
     //TODO Error handling for this one.
     // const { data: returnedData, error }
 
     setSubmitted(true);
-    console.log(response.json())
+    // console.log(response.json())
   };
 
   return (
