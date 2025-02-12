@@ -63,7 +63,7 @@ export const Widget = ({ projectId }: {projectId: string}) => {
               <MailIcon />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="app widget rounded-lg bg-card p-4 shadpw-lg w-full max-w-md "  style={{marginRight: "2rem"}}>
+          <PopoverContent className="app widget rounded-lg bg-card p-4 shadpw-lg w-full max-w-md tailwind"  style={{marginRight: "2rem"}}>
             <style>{tailwindStyles}</style>
             <div className="tailwind">
               {submitted ? (
