@@ -23,7 +23,7 @@ export const Widget = ({ projectId }: {projectId: string}) => {
   const [rating, setRating] = useState(DEFAULT_RATING);
   const [submitted, setSubmitted] = useState(false);
 
-  console.log(projectId);
+  // console.log(projectId);
   const onSelectRate = (index: number) => {
     setRating(index + 1);
   };
@@ -44,13 +44,13 @@ export const Widget = ({ projectId }: {projectId: string}) => {
       rating: rating,
     };
 
-    console.log(data)
-    const response = await addFeedback(data)
+    // console.log(data)
+    await addFeedback(data)
     //TODO Error handling for this one.
     // const { data: returnedData, error }
 
     setSubmitted(true);
-    console.log(response.json())
+    // console.log(response.json())
   };
 
   return (
